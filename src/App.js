@@ -8,7 +8,8 @@ import './App.css';
 
 class App extends Component {
   state = {
-    data :[]
+    data :[],
+    dataPresent : null
     // country: "Spain",
     // code: "ES",
     // confirmed: 1046641,
@@ -29,6 +30,21 @@ class App extends Component {
       console.log(this.state.data)
   }
 
+  clearSearch = (e) => {
+    e.preventDefault()
+    this.setState({ data : []})
+    console.log("clearing")
+    this.dataIsNotPresent();
+
+  }
+  
+  dataIsPresent = () => {
+    this.setState({ dataPresent : true})
+  }
+
+  dataIsNotPresent = () => {
+    this.setState({ dataPresent : false})
+  }
 
   render(){
   return (
@@ -36,8 +52,8 @@ class App extends Component {
 <body>
     <Navbar/>
   <main>
-    <Search searchCountry={this.searchCountry}/>
-  <CountryItem data={this.state.data}/>
+    <Search searchCountry={this.searchCountry} showClear={this.state.dataPresent ? true : false} dataIsPresent={this.dataIsPresent} dataIsNotPresent={this.dataIsNotPresent} dataPresent={this.state.dataPresent} clearSearch={this.clearSearch}/>
+  <CountryItem data={this.state.data} clearSearch={this.clearSearch}/>
   </main>
     <Footer/>
   </body>

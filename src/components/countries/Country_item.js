@@ -5,7 +5,7 @@ const CountryItem = (props) => {
 
   return (
     <div className="container country-item-div">
-      <h2>Spain</h2>
+      <h2>{props.data.country}</h2>
       <div className="grid-container">
         <div className="result-square confirmed">
           <h6>Confirmed Cases</h6>
