@@ -34,3 +34,28 @@ h2 {
 h6 {
   color: #d32f2f;
 }
+
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  width: 300px;
+}
+
+input[type="text"]::placeholder {
+  text-align: center;
+  color: white;
+}
+
+input[type="text"] {
+  color: white;
+}
+
+.btn {
+  display: block;
+  margin: auto;
+}
