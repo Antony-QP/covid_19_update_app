@@ -1,6 +1,10 @@
 import React, { Component} from 'react';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
+import About from './components/pages/About'
+import News from './components/pages/News'
+import Symptoms from './components/pages/Symptoms'
 import CountryItem from './components/countries/Country_item'
 import Search from './components/countries/Search'
 import axios from 'axios'
@@ -22,6 +26,25 @@ class App extends Component {
     // lastUpdate: "2020-10-22T11:00:05+02:00"
   }
 
+  clearFormAndCountry = () => {
+    this.hideResults()
+    this.clearSearch()
+  }
+
+  showFormAndResults = () => {
+    this.searchCountry()
+    this.showResults()
+  }
+
+  showResults = () => {
+    let results = document.querySelector('.country-item-div')
+    results.style.display = 'block'
+  }
+
+  hideResults = () => {
+    let results = document.querySelector('.country-item-div')
+    results.style.display = 'none'
+  }
 
 // Get COVID data from the api
   searchCountry = async (text) => {
@@ -48,16 +71,26 @@ class App extends Component {
 
   render(){
   return (
+    <Router>
 <div>
 <body>
     <Navbar/>
+    <Switch>
   <main>
-    <Search searchCountry={this.searchCountry} showClear={this.state.dataPresent ? true : false} dataIsPresent={this.dataIsPresent} dataIsNotPresent={this.dataIsNotPresent} dataPresent={this.state.dataPresent} clearSearch={this.clearSearch}/>
-  <CountryItem data={this.state.data} clearSearch={this.clearSearch}/>
+    <Route exact path='/'></Route>
+    <Search searchCountry={this.searchCountry} showClear={this.state.dataPresent ? true : false} dataIsPresent={this.dataIsPresent} dataIsNotPresent={this.dataIsNotPresent} dataPresent={this.state.dataPresent} clearSearch={this.clearSearch} hideResults={this.hideResults} showResults={this.showResults} clearFormAndCountry={this.clearFormAndCountry} showFormAndResults={this.showFormAndResults}/>
+  <CountryItem data={this.state.data} clearSearch={this.clearSearch} hideResults={this.hideResults} showResults={this.showResults} clearFormAndCountry={this.clearFormAndCountry} showFormAndResults={this.showFormAndResults}/>
+
+  <Route exact path='/about' component={News} />
+  <Route exact path='/symptoms' component={Symptoms}/>
+  <Route exact path='/about' component={About}/>
   </main>
+  </Switch>
     <Footer/>
   </body>
 </div>
+
+</Router>
   );
 }
 }

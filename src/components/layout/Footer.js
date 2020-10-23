@@ -7,7 +7,6 @@ export const Footer = () => {
     <div class="container">
       <div class="row">
       © 2020 Covid-19 Updater
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
       </div>
     </div>
   </footer>

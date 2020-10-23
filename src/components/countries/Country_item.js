@@ -4,7 +4,7 @@ const CountryItem = (props) => {
 
 
   return (
-    <div className="container country-item-div">
+    <div className="container country-item-div fade-in">
       <h2>{props.data.country}</h2>
       <div className="grid-container">
         <div className="result-square confirmed">
